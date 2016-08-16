@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Estimated pomodoro:</strong>
+  <%= @task.estimated_pomodoro %>
+</p>
+
+<p>
+  <strong>Done flg:</strong>
+  <%= @task.done_flg %>
+</p>
+
+<p>
+  <strong>Parent task:</strong>
+  <%= @task.parent_task %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @task.user %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
