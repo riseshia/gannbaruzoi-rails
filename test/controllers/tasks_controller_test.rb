@@ -2,10 +2,6 @@
 require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
-  def task
-    @task ||= tasks :one
-  end
-
   def test_index
     get tasks_url
     assert_response :success
@@ -17,29 +13,35 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_create
-    assert_difference "Task.count" do
-      post tasks_url, params: { task: { description: task.description, done_flg: task.done_flg, estimated_pomodoro: task.estimated_pomodoro, parent_task_id: task.parent_task_id, user_id: task.user_id } }
+    user = create(:user)
+    assert_difference "Task.count", 1 do
+      post tasks_url, params: { task: attributes_for(:task, user_id: user.id) }
     end
 
     assert_redirected_to task_path(Task.last)
   end
 
   def test_show
+    task = create(:task)
     get task_url(task)
     assert_response :success
   end
 
   def test_edit
+    task = create(:task)
     get edit_task_url(task)
     assert_response :success
   end
 
   def test_update
-    patch task_url(task), params: { task: { description: task.description, done_flg: task.done_flg, estimated_pomodoro: task.estimated_pomodoro, parent_task_id: task.parent_task_id, user_id: task.user_id } }
+    task = create(:task)
+    patch task_url(task),
+          params: { task: { done_flg: "true" } }
     assert_redirected_to task_path(task)
   end
 
   def test_destroy
+    task = create(:task)
     assert_difference "Task.count", -1 do
       delete task_url(task)
     end

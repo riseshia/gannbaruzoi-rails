@@ -56,4 +56,6 @@ end
 group :test do
   gem "minitest-rails"
   gem "shoulda"
+  gem "factory_girl_rails"
+  gem "database_rewinder"
 end

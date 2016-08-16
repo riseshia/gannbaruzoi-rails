@@ -2,11 +2,8 @@
 require "test_helper"
 
 class PomodoroTest < ActiveSupport::TestCase
-  def pomodoro
-    @pomodoro ||= Pomodoro.new
-  end
-
   def test_valid
+    pomodoro = build(:pomodoro)
     assert pomodoro.valid?
   end
 end
