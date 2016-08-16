@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @pomodoro.task %>
+</p>
+
+<%= link_to 'Edit', edit_pomodoro_path(@pomodoro) %> |
+<%= link_to 'Back', pomodoros_path %>

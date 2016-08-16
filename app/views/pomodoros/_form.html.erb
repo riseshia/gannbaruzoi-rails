@@ -1,0 +1,22 @@
+<%= form_for(pomodoro) do |f| %>
+  <% if pomodoro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pomodoro.errors.count, "error") %> prohibited this pomodoro from being saved:</h2>
+
+      <ul>
+      <% pomodoro.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :task_id %>
+    <%= f.text_field :task_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
