@@ -16,3 +16,6 @@ Style/StringLiterals:
 
 Rails:
   Enabled: true
+
+TrailingBlankLines:
+  EnforcedStyle: final_blank_line
