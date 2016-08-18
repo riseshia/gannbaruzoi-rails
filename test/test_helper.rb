@@ -16,6 +16,7 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in
     # alphabetical order.
     include FactoryGirl::Syntax::Methods
+    include Devise::Test::IntegrationHelpers
     # Add more helper methods to be used by all tests here...
 
     def teardown
