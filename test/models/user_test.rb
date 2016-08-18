@@ -9,7 +9,7 @@ class UserTest < ActiveSupport::TestCase
 
     assert user.persisted?
   end
-  
+
   def test_from_omniauth_return_exist_user
     user = create(:user)
     auth = Auth.new(user.uid, user.email, user.name)
