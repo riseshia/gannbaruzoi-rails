@@ -2,6 +2,11 @@
 require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = create(:user)
+    sign_in @user
+  end
+
   def test_index
     get tasks_url
     assert_response :success
