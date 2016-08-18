@@ -4,6 +4,7 @@ rvm:
 services:
   - mysql
 before_script:
+  - mv config/application.yml.ci config/application.yml
   - RAILS_ENV=test bundle exec rails db:create db:schema:load
 script:
   - bundle exec rails test
