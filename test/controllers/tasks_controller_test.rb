@@ -27,31 +27,59 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_show
-    task = create(:task)
+    task = create(:task, user: @user)
     get task_url(task)
     assert_response :success
   end
 
-  def test_edit
+  def test_show_task_with_the_other_user
     task = create(:task)
+    get task_url(task)
+    assert_redirected_to root_url
+  end
+
+  def test_edit
+    task = create(:task, user: @user)
     get edit_task_url(task)
     assert_response :success
   end
 
-  def test_update
+  def test_edit_task_with_the_other_user
     task = create(:task)
+    get edit_task_url(task)
+    assert_redirected_to root_url
+  end
+
+  def test_update
+    task = create(:task, user: @user)
     patch task_url(task),
           params: { task: { done_flg: "true" } }
     assert_redirected_to task_path(task)
   end
 
-  def test_destroy
+  def test_update_with_the_other_user
     task = create(:task)
+    patch task_url(task),
+          params: { task: { done_flg: "true" } }
+    assert_redirected_to root_url
+  end
+
+  def test_destroy
+    task = create(:task, user: @user)
     assert_difference "Task.count", -1 do
       delete task_url(task)
     end
 
     assert_redirected_to tasks_path
+  end
+
+  def test_destroy_with_the_other_user
+    task = create(:task)
+    assert_no_difference "Task.count" do
+      delete task_url(task)
+    end
+
+    assert_redirected_to root_url
   end
 end
 

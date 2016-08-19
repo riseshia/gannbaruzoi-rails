@@ -2,6 +2,9 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  should have_many(:tasks)
+  should have_many(:pomodoros).through(:tasks)
+
   def test_from_omniauth_return_new_user
     assert_nil User.find_by_uid("some_uid")
     auth = Auth.new("some_uid", "test@email.com", "name")

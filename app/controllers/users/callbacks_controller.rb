@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-# CallbacksController
 module Users
+  # CallbacksController
   class CallbacksController < Devise::OmniauthCallbacksController
     def github
       @user = User.from_omniauth(request.env["omniauth.auth"])
