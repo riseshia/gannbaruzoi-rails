@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :pomodoros
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/callbacks"
+  }
   resources :tasks
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/callbacks" }
+  resources :pomodoros, except: [:edit, :update]
 
   root "tasks#index"
 end

@@ -4,7 +4,7 @@ require "test_helper"
 class TaskTest < ActiveSupport::TestCase
   should belong_to(:user)
   should have_many(:pomodoros)
-  
+
   def test_valid
     task = build(:task)
     assert task.valid?
