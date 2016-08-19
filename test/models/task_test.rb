@@ -6,5 +6,21 @@ class TaskTest < ActiveSupport::TestCase
     task = build(:task)
     assert task.valid?
   end
+
+  def test_init_with_user
+    user = build(:user)
+    task = Task.init_with_user(params, user)
+    assert task.is_a?(Task)
+    assert task.valid?
+  end
+
+  private
+
+  def params
+    {
+      description: "Description",
+      estimated_pomodoro: 2
+    }
+  end
 end
 
