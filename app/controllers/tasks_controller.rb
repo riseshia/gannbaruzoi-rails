@@ -60,7 +60,7 @@ class TasksController < ApplicationController
   def task_params
     params
       .require(:task)
-      .permit(:description, :estimated_pomodoro, :done_flg, :parent_task_id)
+      .permit(:description, :estimated_pomodoro, :parent_task_id)
   end
 end
 
