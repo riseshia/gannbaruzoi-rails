@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   }
   resources :tasks do
     patch :log, on: :member
+    patch :done, on: :member
   end
   resources :pomodoros, only: [:index, :destroy]
 

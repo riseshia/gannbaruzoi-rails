@@ -2,7 +2,8 @@
 
 # TasksController
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :log]
+  before_action :set_task, only: [:show, :edit, :update,
+                                  :destroy, :log, :done]
 
   # GET /tasks
   def index
@@ -48,12 +49,21 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: "Task was successfully destroyed."
   end
 
-  # POST /tasks/1/log
+  # PATCH /tasks/1/log
   def log
     if @task.add_log
       redirect_to tasks_path, notice: "Pomodoro was successfully added."
     else
       redirect_to tasks_path, notice: "Pomodoro was not added."
+    end
+  end
+
+  # PATCH /tasks/1/done
+  def done
+    if @task.toggle!(:done_flg)
+      redirect_to tasks_path, notice: "Task was successfully done."
+    else
+      redirect_to tasks_path, notice: "Task was not done."
     end
   end
 

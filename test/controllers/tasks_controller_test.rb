@@ -78,6 +78,18 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  def test_done
+    task = create(:task, user: @user)
+    patch done_task_path(task)
+    assert_redirected_to tasks_path
+  end
+
+  def test_done_with_the_other_user
+    task = create(:task)
+    patch task_path(task)
+    assert_redirected_to root_url
+  end
+  
   def test_destroy
     task = create(:task, user: @user)
     assert_difference "Task.count", -1 do

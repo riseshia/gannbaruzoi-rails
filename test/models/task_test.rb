@@ -33,6 +33,16 @@ class TaskTest < ActiveSupport::TestCase
     end
   end
 
+  def test_done_returns_true
+    task = build(:task, done_flg: true)
+    assert task.done?
+  end
+
+  def test_done_returns_false
+    task = build(:task, done_flg: false)
+    refute task.done?
+  end
+
   private
 
   def params
