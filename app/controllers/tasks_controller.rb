@@ -2,11 +2,12 @@
 
 # TasksController
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update,
+                                  :destroy, :log, :done]
 
   # GET /tasks
   def index
-    @tasks = Task.where(user_id: current_user.id)
+    @tasks = Task.where(user_id: current_user.id).order(done_flg: :asc)
   end
 
   # GET /tasks/1
@@ -48,6 +49,24 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: "Task was successfully destroyed."
   end
 
+  # PATCH /tasks/1/log
+  def log
+    if @task.add_log
+      redirect_to tasks_path, notice: "Pomodoro was successfully added."
+    else
+      redirect_to tasks_path, notice: "Pomodoro was not added."
+    end
+  end
+
+  # PATCH /tasks/1/done
+  def done
+    if @task.toggle!(:done_flg)
+      redirect_to tasks_path, notice: "Task was successfully done."
+    else
+      redirect_to tasks_path, notice: "Task was not done."
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -60,7 +79,7 @@ class TasksController < ApplicationController
   def task_params
     params
       .require(:task)
-      .permit(:description, :estimated_pomodoro, :done_flg, :parent_task_id)
+      .permit(:description, :estimated_pomodoro, :parent_task_id)
   end
 end
 
