@@ -64,6 +64,20 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  def test_log
+    task = create(:task, user: @user)
+    assert_difference "Pomodoro.count", 1 do
+      patch log_task_path(task)
+    end
+    assert_redirected_to tasks_path
+  end
+
+  def test_log_with_the_other_user
+    task = create(:task)
+    patch log_task_path(task)
+    assert_redirected_to root_url
+  end
+
   def test_destroy
     task = create(:task, user: @user)
     assert_difference "Task.count", -1 do

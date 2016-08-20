@@ -11,5 +11,9 @@ class Task < ApplicationRecord
     task.user = user
     task
   end
+
+  def add_log
+    Pomodoro.create(task_id: id)
+  end
 end
 
