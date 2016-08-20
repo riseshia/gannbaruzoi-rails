@@ -89,7 +89,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     patch task_path(task)
     assert_redirected_to root_url
   end
-  
+
   def test_destroy
     task = create(:task, user: @user)
     assert_difference "Task.count", -1 do
