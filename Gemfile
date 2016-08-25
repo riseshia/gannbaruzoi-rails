@@ -60,5 +60,6 @@ group :test do
   gem "shoulda"
   gem "factory_girl_rails"
   gem "database_rewinder"
+  gem "codeclimate-test-reporter", require: false
 end
 

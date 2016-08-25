@@ -7,5 +7,5 @@ before_script:
   - mv config/application.yml.ci config/application.yml
   - RAILS_ENV=test bundle exec rails db:create db:schema:load
 script:
-  - bundle exec rails test
+  - CODECLIMATE_REPO_TOKEN=cdd940ce5d61e4859ae78946efdc1e6181583d66882c8b7b152e00ed69809eda bin/rails test
 install: bundle install
