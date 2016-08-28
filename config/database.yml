@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: rails_template_production
-  username: rails_template
-  password: <%= ENV['RAILS_TEMPLATE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['GB_DATABASE_NAME'] %>
+  username: <%= ENV['GB_DATABASE_USERNAME'] %>
+  password: <%= ENV['GB_DATABASE_PASSWORD'] %>

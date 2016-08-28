@@ -176,3 +176,6 @@ tags
 
 # Ignore application configuration
 /config/application.yml
+/config/deploy/
+/config/deploy.rb
+Capfile
