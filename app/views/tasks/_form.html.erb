@@ -22,8 +22,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :parent_task_id %>
-    <%= f.select :parent_task_id, Task.all.pluck(:id, :description), prompt: "-- Select Parent Task --" %>
+    <%= f.hidden_field :parent_task_id %>
   </div>
 
   <div class="actions">
