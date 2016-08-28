@@ -2,33 +2,20 @@
 
 <h1>Tasks</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Done flg</th>
-      <th>Description</th>
-      <th>Estimated</th>
-      <th>Logged</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.done_flg %></td>
-        <td><%= task.description %></td>
-        <td><%= task.estimated_pomodoro %></td>
-        <td><%= task.pomodoros.count %></td>
-        <td><%= link_to_unless task.done?, 'Log', log_task_path(task), method: :patch %></td>
-        <td><%= link_to_unless task.done? || task.subtask?, 'Add subtask', new_task_path(parent_task_id: task) %></td>
-        <td><%= link_to_unless task.done?, 'Done', done_task_path(task), method: :patch %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= render "task", task: task %>
+      <% if task.subtasks.present? %>
+        <ul>
+          <% task.subtasks.each do |subtask| %>
+            <li><%= render "task", task: subtask %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
     <% end %>
-  </tbody>
-</table>
+</ul>
 
 <br>
 

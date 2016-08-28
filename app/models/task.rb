@@ -5,6 +5,14 @@ class Task < ApplicationRecord
   belongs_to :parent_task, optional: true, class_name: "Task"
   belongs_to :user
   has_many :pomodoros
+  has_many :subtasks, source: :tasks,
+                      foreign_key: :parent_task_id,
+                      class_name: "Task"
+
+  scope :main_task_of, lambda { |user_id|
+    where(user_id: user_id, parent_task_id: nil)
+      .order(done_flg: :asc, id: :desc)
+  }
 
   delegate :description, to: :parent_task, prefix: true
 

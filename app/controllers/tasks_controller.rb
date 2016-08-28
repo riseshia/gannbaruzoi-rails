@@ -7,7 +7,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.where(user_id: current_user.id).order(done_flg: :asc)
+    @tasks = Task.main_task_of(current_user.id).includes(:subtasks)
   end
 
   # GET /tasks/1

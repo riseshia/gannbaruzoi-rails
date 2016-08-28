@@ -1,0 +1,10 @@
+<%= task.done? ? "[x]" : link_to("[ ]", done_task_path(task), method: :patch) %>
+<%= task.description %>
+(Estimated: <%= task.estimated_pomodoro %>,
+Logged: <%= task.pomodoros.count %>)
+<% unless task.done? %>
+  <%= link_to "+1", log_task_path(task), method: :patch %>
+  <%= task.subtask? ? "" : link_to('Add subtask', new_task_path(parent_task_id: task)) %>
+<% end %>
+<%= link_to 'Edit', edit_task_path(task) %>
+<%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %>

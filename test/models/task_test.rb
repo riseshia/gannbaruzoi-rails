@@ -4,10 +4,22 @@ require "test_helper"
 class TaskTest < ActiveSupport::TestCase
   should belong_to(:user)
   should have_many(:pomodoros)
+  should have_many(:subtasks).source(:tasks)
+    .with_foreign_key(:parent_task_id).class_name("Task")
 
   def test_valid
     task = build(:task)
     assert task.valid?
+  end
+
+  def test_main_task_of_returns_correct_tasks
+    user = create(:user)
+    tasks = [create(:task, user_id: user.id, done_flg: true),
+             create(:task, user_id: user.id)]
+    create(:task, user_id: user.id, parent_task: tasks.first)
+
+    actual = Task.main_task_of(user.id)
+    assert_equal tasks.reverse, actual
   end
 
   def test_init_with_user
