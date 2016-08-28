@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = Task.new(parent_task_id: parent_task_id)
   end
 
   # GET /tasks/1/edit
@@ -72,6 +72,11 @@ class TasksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = current_user.tasks.find(params[:id])
+  end
+
+  def parent_task_id
+    return nil unless params[:parent_task_id]
+    Task.find_by_id(params[:parent_task_id])&.id
   end
 
   # Never trust parameters from the scary internet,

@@ -15,10 +15,12 @@
   <%= @task.done_flg %>
 </p>
 
+<% if @task.subtask? %>
 <p>
   <strong>Parent task:</strong>
-  <%= @task.parent_task %>
+  <%= link_to @task.parent_task_description, @task.parent_task %>
 </p>
+<% end %>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

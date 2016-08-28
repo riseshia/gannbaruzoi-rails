@@ -3,8 +3,7 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = create(:user)
-    sign_in @user
+    sign_in @user = create(:user)
   end
 
   def test_index

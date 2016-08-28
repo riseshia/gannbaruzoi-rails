@@ -43,6 +43,17 @@ class TaskTest < ActiveSupport::TestCase
     refute task.done?
   end
 
+  def test_subtask_returns_true
+    parent_task = create(:task)
+    task = build(:task, parent_task: parent_task)
+    assert task.subtask?
+  end
+
+  def test_subtask_returns_false
+    task = build(:task)
+    refute task.subtask?
+  end
+
   private
 
   def params
